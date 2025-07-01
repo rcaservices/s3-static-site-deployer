@@ -1,1 +1,76 @@
+Here is the content for the `templates/bucket-policy.json` file to include in your GitHub repo:
+
+---
+
+### 📄 `templates/bucket-policy.json`
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::BUCKET_NAME_PLACEHOLDER/*"
+    }
+  ]
+}
+```
+
+---
+
+### 🔧 Notes:
+
+* Replace `BUCKET_NAME_PLACEHOLDER` in the script at runtime with your actual S3 bucket name.
+* This policy allows **public read access** to objects in the bucket, which is necessary for static website hosting.
+
+Here's the updated `templates/bucket-policy.json` file that includes **both** the **public read access policy** and a **CloudFront Origin Access Identity (OAI)** policy template. You can uncomment and use the appropriate block depending on your use case.
+
+---
+
+### 📄 `templates/bucket-policy.json`
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::BUCKET_NAME_PLACEHOLDER/*"
+    }
+
+    /* Uncomment this block and comment out the one above to use CloudFront OAI instead of public access:
+
+    ,
+    {
+      "Sid": "AllowCloudFrontServicePrincipalReadOnly",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity OAI_ID_PLACEHOLDER"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::BUCKET_NAME_PLACEHOLDER/*"
+    }
+    */
+  ]
+}
+```
+
+---
+
+### 🛠️ Instructions:
+
+* Replace `BUCKET_NAME_PLACEHOLDER` with your actual S3 bucket name.
+* If using CloudFront with OAI:
+
+  * Replace `OAI_ID_PLACEHOLDER` with your actual Origin Access Identity ID.
+  * Comment out the public read section and uncomment the OAI block.
+
+
+
 
