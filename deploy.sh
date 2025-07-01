@@ -30,12 +30,21 @@ else
   echo "You selected Cloudflare. Using CloudFront OAI for secure delivery."
 fi
 
+
+
 # === CREATE S3 BUCKET ===
 echo "Creating bucket $BUCKET_NAME..."
-aws s3api create-bucket \
-  --bucket "$BUCKET_NAME" \
-  --region "$REGION" \
-  --create-bucket-configuration LocationConstraint="$REGION" || true
+
+if [ "$REGION" == "us-east-1" ]; then
+  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$REGION" || true
+else
+  aws s3api create-bucket \
+    --bucket "$BUCKET_NAME" \
+    --region "$REGION" \
+    --create-bucket-configuration LocationConstraint="$REGION" || true
+fi
+
+
 
 # === CONFIGURE BUCKET POLICY ===
 if [ "$USE_CLOUDFRONT" = true ]; then
