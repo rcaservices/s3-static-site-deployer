@@ -72,5 +72,5 @@ Here's the updated `templates/bucket-policy.json` file that includes **both** th
   * Comment out the public read section and uncomment the OAI block.
 
 
-
+---
 
