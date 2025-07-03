@@ -2,10 +2,10 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "AllowCloudFrontServicePrincipalReadOnly",
+      "Sid": "AllowCloudFrontAccess",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity OAI_ID_PLACEHOLDER"
+        "CanonicalUser": "OAI_ID_PLACEHOLDER"
       },
       "Action": "s3:GetObject",
       "Resource": "arn:aws:s3:::BUCKET_NAME_PLACEHOLDER/*"
