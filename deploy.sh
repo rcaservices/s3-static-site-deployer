@@ -53,5 +53,15 @@ aws s3api put-bucket-policy \
 echo "Uploading files to S3..."
 aws s3 sync site/ s3://"$BUCKET_NAME" --delete
 
+# Generate the static website endpoint from DOMAIN_NAME
+S3_WEBSITE_URL="http://${DOMAIN_NAME}.s3-website-us-east-1.amazonaws.com"
+
+echo ""
 echo "✅ Deployment complete."
+echo "------------------------------------------"
+echo "Bucket Name   : $BUCKET_NAME"
+echo "Domain Name   : $DOMAIN_NAME"
+echo "Website URL   : $S3_WEBSITE_URL"
+echo ""
 echo "👉 Now follow the appropriate manual steps in ./manual-steps/ for SSL certificate and DNS configuration."
+echo "------------------------------------------"
